@@ -1,21 +1,121 @@
-<!-- templates/admin.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard | Organic Health</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fefdf9;
+            color: #2c3e2f;
+            line-height: 1.6;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .admin-header {
+            background: #ffffff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 1rem 0;
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo { font-size: 1.5rem; font-weight: 700; color: #2d6a4f; }
+        .logo i { color: #52b788; margin-right: 8px; }
+        .nav-link {
+            text-decoration: none;
+            color: #2d6a4f;
+            font-weight: 500;
+            margin-left: 2rem;
+        }
+        .admin-logout {
+            background: #e63946;
+            color: white !important;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+        }
+        .admin-container { padding: 2rem 0; }
+        .admin-card {
+            background: white;
+            border-radius: 24px;
+            padding: 1.8rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .admin-card h2 { color: #1b4332; margin-bottom: 1.5rem; font-size: 1.5rem; }
+        .admin-form .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        .form-group { margin-bottom: 1.2rem; }
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #2d6a4f;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 0.7rem;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            font-family: inherit;
+        }
+        .form-hint { font-size: 0.75rem; color: #888; margin-top: 0.3rem; display: block; }
+        .btn-submit {
+            background: #2d6a4f;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .btn-submit:hover { background: #1b4332; }
+        .admin-products-table { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 0.8rem; text-align: left; border-bottom: 1px solid #eee; }
+        th { background: #e8f5e9; color: #1b4332; }
+        .table-image img, .mini-placeholder {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 8px;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn-delete {
+            background: #e63946;
+            color: white;
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        .flash-message {
+            background: #2d6a4f;
+            color: white;
+            padding: 0.75rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+        }
+        @media (max-width: 768px) {
+            .admin-form .form-row { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
     <header class="admin-header">
         <div class="container header-container">
-            <div class="logo">
-                <i class="fas fa-leaf"></i>
-                <span>Organic Health Admin</span>
-            </div>
+            <div class="logo"><i class="fas fa-leaf"></i> Organic Health Admin</div>
             <nav class="nav">
                 <a href="{{ url_for('index') }}" class="nav-link"><i class="fas fa-store"></i> View Store</a>
                 <a href="{{ url_for('admin_logout') }}" class="nav-link admin-logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
@@ -24,10 +124,13 @@
     </header>
 
     <div class="container admin-container">
-        <h1><i class="fas fa-tachometer-alt"></i> Product Management</h1>
-        
-        <!-- Add Product Form -->
-        <div class="admin-card add-product-card">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, message in messages %}
+                <div class="flash-message">{{ message }}</div>
+            {% endfor %}
+        {% endwith %}
+
+        <div class="admin-card">
             <h2><i class="fas fa-plus-circle"></i> Add New Product</h2>
             <form method="POST" action="{{ url_for('add_product') }}" enctype="multipart/form-data" class="admin-form">
                 <div class="form-row">
@@ -52,21 +155,14 @@
                 <button type="submit" class="btn-submit"><i class="fas fa-save"></i> Add Product</button>
             </form>
         </div>
-        
-        <!-- Existing Products List -->
-        <div class="admin-card products-list-card">
+
+        <div class="admin-card">
             <h2><i class="fas fa-boxes"></i> Current Products ({{ products|length }})</h2>
             {% if products %}
                 <div class="admin-products-table">
                     <table>
                         <thead>
-                            <tr>
-                                <th>Image</th>
-                                <th>Name</th>
-                                <th>Price (₦)</th>
-                                <th>Description</th>
-                                <th>Actions</th>
-                            </tr>
+                            <tr><th>Image</th><th>Name</th><th>Price (₦)</th><th>Description</th><th>Actions</th></tr>
                         </thead>
                         <tbody>
                             {% for product in products %}
@@ -80,9 +176,9 @@
                                 </td>
                                 <td><strong>{{ product.name }}</strong></td>
                                 <td>₦{{ "{:,}".format(product.price) }}</td>
-                                <td class="table-desc">{{ product.description[:80] }}{% if product.description|length > 80 %}...{% endif %}</td>
+                                <td>{{ product.description[:80] }}{% if product.description|length > 80 %}...{% endif %}</td>
                                 <td>
-                                    <form method="POST" action="{{ url_for('delete_product', product_id=product.id) }}" onsubmit="return confirm('Delete product \'{{ product.name }}\' permanently?');">
+                                    <form method="POST" action="{{ url_for('delete_product', product_id=product.id) }}" onsubmit="return confirm('Delete product permanently?');">
                                         <button type="submit" class="btn-delete"><i class="fas fa-trash-alt"></i> Delete</button>
                                     </form>
                                 </td>
@@ -92,19 +188,9 @@
                     </table>
                 </div>
             {% else %}
-                <p class="no-products">No products added yet. Use the form above to add your first product!</p>
+                <p>No products added yet.</p>
             {% endif %}
         </div>
     </div>
-    
-    <script>
-        // Auto-hide flash messages after 4 seconds
-        setTimeout(() => {
-            document.querySelectorAll('.flash-message').forEach(msg => {
-                msg.style.opacity = '0';
-                setTimeout(() => msg.remove(), 300);
-            });
-        }, 4000);
-    </script>
 </body>
 </html>

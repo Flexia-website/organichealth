@@ -1,4 +1,3 @@
-/* static/css/style.css */
 * {
     margin: 0;
     padding: 0;
@@ -6,7 +5,7 @@
 }
 
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
     background-color: #fefdf9;
     color: #2c3e2f;
     line-height: 1.6;
@@ -32,6 +31,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .logo {
@@ -43,6 +43,11 @@ body {
 .logo i {
     color: #52b788;
     margin-right: 8px;
+}
+
+.nav {
+    display: flex;
+    gap: 1rem;
 }
 
 .nav-link {
@@ -59,14 +64,20 @@ body {
 
 .admin-btn {
     background: #2d6a4f;
-    color: white;
+    color: white !important;
     padding: 0.5rem 1rem;
     border-radius: 30px;
 }
 
 .admin-btn:hover {
     background: #1b4332;
-    color: white;
+}
+
+.admin-logout {
+    background: #e63946;
+    color: white !important;
+    padding: 0.5rem 1rem;
+    border-radius: 30px;
 }
 
 /* Hero Section */
@@ -145,6 +156,11 @@ body {
 .flash-warning {
     border-left: 5px solid #ffb703;
     color: #9c6e00;
+}
+
+.flash-info {
+    border-left: 5px solid #2196f3;
+    color: #0b5e7e;
 }
 
 @keyframes slideIn {
@@ -364,6 +380,7 @@ body {
     margin-right: 1rem;
     font-size: 1.2rem;
     transition: 0.3s;
+    display: inline-block;
 }
 
 .social-links a:hover {
@@ -426,7 +443,7 @@ body {
 .login-form input {
     width: 100%;
     padding: 0.8rem;
-    border: 1px solid #ccc;
+    border: 1px solid #ddd;
     border-radius: 12px;
     font-size: 1rem;
 }
@@ -578,17 +595,37 @@ body {
     padding: 2rem;
 }
 
+/* Responsive */
 @media (max-width: 768px) {
     .hero h1 {
         font-size: 2rem;
     }
+    
     .products-grid {
         grid-template-columns: 1fr;
     }
+    
     .admin-form .form-row {
         grid-template-columns: 1fr;
     }
-    .admin-products-table th, .admin-products-table td {
+    
+    .admin-products-table th, 
+    .admin-products-table td {
         font-size: 0.85rem;
+    }
+    
+    .header-container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .nav-link {
+        margin-left: 0;
+        margin: 0 0.5rem;
+    }
+    
+    .talk-details {
+        flex-direction: column;
+        gap: 0.5rem;
     }
 }

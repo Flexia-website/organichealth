@@ -1,0 +1,594 @@
+/* static/css/style.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #fefdf9;
+    color: #2c3e2f;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header */
+.header, .admin-header {
+    background: #ffffff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 1rem 0;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2d6a4f;
+}
+
+.logo i {
+    color: #52b788;
+    margin-right: 8px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #2d6a4f;
+    font-weight: 500;
+    margin-left: 2rem;
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
+    color: #1b4332;
+}
+
+.admin-btn {
+    background: #2d6a4f;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 30px;
+}
+
+.admin-btn:hover {
+    background: #1b4332;
+    color: white;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6d9 100%);
+    padding: 4rem 0;
+    text-align: center;
+    border-radius: 0 0 40px 40px;
+}
+
+.hero h1 {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+    color: #1b4332;
+}
+
+.highlight {
+    color: #2d6a4f;
+    border-bottom: 3px solid #52b788;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    color: #2d6a4f;
+}
+
+.btn-primary {
+    display: inline-block;
+    background: #2d6a4f;
+    color: white;
+    padding: 0.8rem 2rem;
+    border-radius: 40px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background: #1b4332;
+    transform: translateY(-2px);
+}
+
+/* Flash Messages */
+.flash-container {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    z-index: 1000;
+    max-width: 350px;
+}
+
+.flash-message {
+    background: white;
+    padding: 1rem 1.5rem;
+    margin-bottom: 0.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    animation: slideIn 0.3s ease;
+    transition: opacity 0.3s;
+}
+
+.flash-success {
+    border-left: 5px solid #2d6a4f;
+    color: #1b4332;
+}
+
+.flash-danger {
+    border-left: 5px solid #e63946;
+    color: #9d1f2c;
+}
+
+.flash-warning {
+    border-left: 5px solid #ffb703;
+    color: #9c6e00;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Products Grid */
+.products-section {
+    padding: 4rem 0;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-header h2 {
+    font-size: 2.2rem;
+    color: #1b4332;
+    margin-bottom: 0.5rem;
+}
+
+.section-header p {
+    color: #52796f;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+.product-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 30px rgba(0,0,0,0.1);
+}
+
+.product-image {
+    height: 220px;
+    background: #f5f7f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.image-placeholder {
+    text-align: center;
+    color: #a3b18a;
+}
+
+.image-placeholder i {
+    font-size: 3.5rem;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.image-placeholder span {
+    font-size: 0.9rem;
+}
+
+.product-info {
+    padding: 1.5rem;
+}
+
+.product-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #2d6a4f;
+    margin-bottom: 0.5rem;
+}
+
+.product-price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1b4332;
+    margin-bottom: 0.8rem;
+}
+
+.product-description {
+    color: #4a5d4e;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.product-functions {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #e8f5e9;
+    padding: 0.3rem 0.8rem;
+    border-radius: 30px;
+    font-size: 0.8rem;
+    color: #2d6a4f;
+    margin-bottom: 1rem;
+}
+
+.btn-inquiry {
+    width: 100%;
+    background: transparent;
+    border: 2px solid #2d6a4f;
+    color: #2d6a4f;
+    padding: 0.6rem;
+    border-radius: 40px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-inquiry:hover {
+    background: #2d6a4f;
+    color: white;
+}
+
+/* Health Talk Section */
+.health-talk {
+    padding: 3rem 0;
+    background: linear-gradient(120deg, #d8f3dc, #b7e4c7);
+    margin: 2rem 0;
+}
+
+.talk-card {
+    background: white;
+    border-radius: 30px;
+    padding: 2rem;
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+}
+
+.talk-icon i {
+    font-size: 3rem;
+    color: #2d6a4f;
+    background: #e8f5e9;
+    padding: 1rem;
+    border-radius: 50%;
+}
+
+.talk-card h3 {
+    font-size: 1.8rem;
+    color: #1b4332;
+    margin: 1rem 0 0.5rem;
+}
+
+.talk-details {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 1.5rem 0;
+    color: #52796f;
+}
+
+.talk-details i {
+    margin-right: 0.3rem;
+}
+
+.btn-secondary {
+    background: #2d6a4f;
+    color: white;
+    border: none;
+    padding: 0.7rem 1.8rem;
+    border-radius: 40px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-secondary:hover {
+    background: #1b4332;
+}
+
+/* Footer */
+.footer {
+    background: #1b4332;
+    color: #d8f3dc;
+    padding: 3rem 0 1rem;
+    margin-top: 3rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.footer-section h4 {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.social-links a {
+    color: #d8f3dc;
+    margin-right: 1rem;
+    font-size: 1.2rem;
+    transition: 0.3s;
+}
+
+.social-links a:hover {
+    color: #52b788;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid #2d6a4f;
+    font-size: 0.85rem;
+}
+
+/* Admin Styles */
+.admin-login-body {
+    background: linear-gradient(135deg, #d8f3dc 0%, #b7e4c7 100%);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 450px;
+    padding: 20px;
+}
+
+.login-card {
+    background: white;
+    border-radius: 30px;
+    padding: 2rem;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.login-icon {
+    font-size: 3rem;
+    color: #2d6a4f;
+    margin-bottom: 1rem;
+}
+
+.login-card h2 {
+    color: #1b4332;
+    margin-bottom: 0.5rem;
+}
+
+.login-form .form-group {
+    text-align: left;
+    margin-bottom: 1.5rem;
+}
+
+.login-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #2d6a4f;
+    font-weight: 500;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    font-size: 1rem;
+}
+
+.btn-login {
+    width: 100%;
+    background: #2d6a4f;
+    color: white;
+    border: none;
+    padding: 0.8rem;
+    border-radius: 40px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-login:hover {
+    background: #1b4332;
+}
+
+.login-footer {
+    margin-top: 1.5rem;
+}
+
+.login-footer a {
+    color: #2d6a4f;
+    text-decoration: none;
+}
+
+.admin-container {
+    padding: 2rem 0;
+}
+
+.admin-card {
+    background: white;
+    border-radius: 24px;
+    padding: 1.8rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.admin-card h2 {
+    color: #1b4332;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+.admin-form .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #2d6a4f;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 0.7rem;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    font-family: inherit;
+}
+
+.form-hint {
+    font-size: 0.75rem;
+    color: #888;
+    display: block;
+    margin-top: 0.3rem;
+}
+
+.btn-submit {
+    background: #2d6a4f;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 40px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-submit:hover {
+    background: #1b4332;
+}
+
+.admin-products-table {
+    overflow-x: auto;
+}
+
+.admin-products-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.admin-products-table th, .admin-products-table td {
+    padding: 0.8rem;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.admin-products-table th {
+    background: #e8f5e9;
+    color: #1b4332;
+}
+
+.table-image img, .mini-placeholder {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 8px;
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.table-desc {
+    max-width: 300px;
+}
+
+.btn-delete {
+    background: #e63946;
+    color: white;
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: 0.3s;
+}
+
+.btn-delete:hover {
+    background: #c1121f;
+}
+
+.no-products {
+    text-align: center;
+    color: #7f8c8d;
+    padding: 2rem;
+}
+
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
+    .admin-form .form-row {
+        grid-template-columns: 1fr;
+    }
+    .admin-products-table th, .admin-products-table td {
+        font-size: 0.85rem;
+    }
+}
